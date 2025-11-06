@@ -8,28 +8,24 @@
  * @author MyBook SAGA 12
  */
 public class HitungHari {
-
-    public int hitung(int tahun, String bulan) {
-        int hari = 0;
+    public static int hitung(int tahun, String bulan) {
+        int jumlahHari = 0;
         switch (bulan) {
             case "Januari": case "Maret": case "Mei": case "Juli":
             case "Agustus": case "Oktober": case "Desember":
-                hari = 31;
-                break;
+                jumlahHari = 31; break;
             case "April": case "Juni": case "September": case "November":
-                hari = 30;
-                break;
+                jumlahHari = 30; break;
             case "Februari":
-                if ((tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0)) {
-                    hari = 29; // tahun kabisat
-                } else {
-                    hari = 28;
-                }
+                if ((tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0))
+                    jumlahHari = 29;
+                else jumlahHari = 28;
                 break;
         }
-        return hari;
+        return jumlahHari;
     }
 }
+
 
 
 

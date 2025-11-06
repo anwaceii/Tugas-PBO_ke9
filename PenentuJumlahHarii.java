@@ -40,7 +40,7 @@ public class PenentuJumlahHarii extends javax.swing.JFrame {
         txtTahun = new javax.swing.JTextField();
         comboBulan = new javax.swing.JComboBox<>();
         panelLabel = new javax.swing.JPanel();
-        lblHasil = new javax.swing.JLabel();
+        labelHasil = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnHitung = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
@@ -106,23 +106,22 @@ public class PenentuJumlahHarii extends javax.swing.JFrame {
 
         panelLabel.setBackground(new java.awt.Color(153, 255, 255));
 
-        lblHasil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblHasil.setText("jLabel4");
-        lblHasil.setPreferredSize(new java.awt.Dimension(40, 16));
+        labelHasil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelHasil.setText("jLabel4");
 
         javax.swing.GroupLayout panelLabelLayout = new javax.swing.GroupLayout(panelLabel);
         panelLabel.setLayout(panelLabelLayout);
         panelLabelLayout.setHorizontalGroup(
             panelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLabelLayout.createSequentialGroup()
-                .addComponent(lblHasil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 327, Short.MAX_VALUE))
+                .addComponent(labelHasil)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelLabelLayout.setVerticalGroup(
             panelLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLabelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(lblHasil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelHasil)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -187,7 +186,7 @@ public class PenentuJumlahHarii extends javax.swing.JFrame {
                 .addComponent(btnSimpan)
                 .addGap(12, 12, 12)
                 .addComponent(btnKeluar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,20 +248,13 @@ public class PenentuJumlahHarii extends javax.swing.JFrame {
     private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
         // TODO add your handling code here:
     try {
-        // Ambil input dari GUI
         int tahun = Integer.parseInt(txtTahun.getText());
-        String bulan = (String) comboBulan.getSelectedItem();
+        String bulan = comboBulan.getSelectedItem().toString();
 
-        // Proses hitung jumlah hari
-        HitungHari hitung = new HitungHari();
-        int jumlahHari = hitung.hitung(tahun, bulan);
-
-        // Tampilkan hasil lengkap (bukan hanya "Januari")
-        lblHasil.setText("Jumlah hari pada bulan " + bulan + 
-                         " tahun " + tahun + " adalah " + jumlahHari + " hari.");
-
-    } catch (NumberFormatException e) {
-        lblHasil.setText("Input tahun harus berupa angka!");
+        int hari = HitungHari.hitung(tahun, bulan);
+        labelHasil.setText("Jumlah hari pada bulan " + bulan + " tahun " + tahun + " adalah " + hari);
+    } catch (Exception e) {
+        labelHasil.setText("Tahun tidak valid!");
     }
     }//GEN-LAST:event_btnHitungActionPerformed
 
@@ -283,14 +275,14 @@ public class PenentuJumlahHarii extends javax.swing.JFrame {
         // TODO add your handling code here:   
         txtTahun.setText("");
         comboBulan.setSelectedIndex(0);
-        lblHasil.setText("");
+        labelHasil.setText("");
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
         try {
         java.io.FileWriter simpan = new java.io.FileWriter("hasil_hitung_hari.txt", true);
-        simpan.write(lblHasil.getText() + "\n");
+        simpan.write(labelHasil.getText() + "\n");
         simpan.close();
         javax.swing.JOptionPane.showMessageDialog(this, "Berhasil disimpan ke file!");
     } catch (Exception e) {
@@ -335,7 +327,7 @@ public class PenentuJumlahHarii extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblHasil;
+    private javax.swing.JLabel labelHasil;
     private javax.swing.JPanel panelHasil;
     private javax.swing.JPanel panelLabel;
     private javax.swing.JTextField txtTahun;
